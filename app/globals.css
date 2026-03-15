@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "mapbox-gl/dist/mapbox-gl.css";
+@import "maplibre-gl/dist/maplibre-gl.css";
 
 :root {
   --background: #050912;
@@ -45,6 +46,19 @@ a {
 }
 
 .risk-popup .mapboxgl-popup-tip {
+  border-top-color: rgba(7, 14, 28, 0.95);
+  border-bottom-color: rgba(7, 14, 28, 0.95);
+}
+
+.risk-popup .maplibregl-popup-content {
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 10px;
+  background: rgba(7, 14, 28, 0.95);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.45);
+  padding: 8px 10px;
+}
+
+.risk-popup .maplibregl-popup-tip {
   border-top-color: rgba(7, 14, 28, 0.95);
   border-bottom-color: rgba(7, 14, 28, 0.95);
 }

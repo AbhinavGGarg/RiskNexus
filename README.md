@@ -22,7 +22,7 @@ Layered exploration flow:
 - Next.js (App Router)
 - React + TypeScript
 - TailwindCSS
-- Mapbox GL JS
+- Mapbox GL JS + MapLibre fallback
 - Recharts
 - react-force-graph-2d
 
@@ -42,13 +42,15 @@ The MVP uses simulated data and periodic updates:
 npm install
 ```
 
-2. Add environment variables:
+2. Optional environment variable:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Then set `NEXT_PUBLIC_MAPBOX_TOKEN` in `.env.local`.
+`NEXT_PUBLIC_MAPBOX_TOKEN` is optional.
+If provided, the app uses Mapbox.
+If omitted, the app automatically uses a token-free MapLibre basemap.
 
 3. Run development server:
 
@@ -69,7 +71,7 @@ npm run start
 
 1. Push this folder to a Git repository.
 2. Import the project in [Vercel](https://vercel.com/new).
-3. Set environment variable `NEXT_PUBLIC_MAPBOX_TOKEN` in Vercel project settings.
+3. Optional: set `NEXT_PUBLIC_MAPBOX_TOKEN` in Vercel project settings if you want Mapbox tiles.
 4. Deploy.
 
 Vercel will automatically run `npm install` and `npm run build`.
@@ -84,4 +86,4 @@ Vercel will automatically run `npm install` and `npm run build`.
 ## Notes
 
 - The map works without backend services using mock signal generation.
-- If no Mapbox token is present, the app shows a graceful message in map panels.
+- If no Mapbox token is present, the app automatically uses MapLibre fallback tiles.
