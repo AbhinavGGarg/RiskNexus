@@ -30,21 +30,21 @@ export default function RegionDetailPage() {
       <Panel className="space-y-3">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-slate-400">Region Details</p>
+            <p className="text-xs uppercase tracking-[0.14em] text-slate-400">Zone Detail</p>
             <h1 className="mt-1 text-2xl font-semibold text-slate-100">{insight.region.name}</h1>
-            <p className="mt-1 text-sm text-slate-400">Focused view of current risk drivers.</p>
+            <p className="mt-1 text-sm text-slate-400">Focused view of current civilian danger drivers.</p>
           </div>
           <Link
             href="/map"
             className="rounded-md border border-white/15 px-3 py-1.5 text-xs text-slate-200 hover:border-cyan-200/40"
           >
-            Back to Signals Map
+            Back to Conflict Map
           </Link>
         </div>
 
         <div className="grid gap-3 md:grid-cols-2">
           <div className="rounded-xl border border-white/10 bg-slate-900/70 p-4">
-            <p className="text-xs uppercase tracking-[0.12em] text-slate-400">Risk Score</p>
+            <p className="text-xs uppercase tracking-[0.12em] text-slate-400">Danger Score</p>
             <p className="mt-2 text-3xl font-semibold text-rose-200">{formatScore(insight.riskScore)}</p>
           </div>
           <div className="rounded-xl border border-white/10 bg-slate-900/70 p-4">
@@ -61,9 +61,9 @@ export default function RegionDetailPage() {
       </Panel>
 
       <Panel>
-        <h2 className="text-base font-semibold text-slate-100">Key Signals Affecting This Region</h2>
+        <h2 className="text-base font-semibold text-slate-100">Latest Warning Signals</h2>
         <p className="mt-1 text-sm text-slate-400">
-          Select a signal card to inspect causes, dependencies, and potential cascade impact.
+          Select an alert to inspect likely triggers and potential civilian impact.
         </p>
 
         <div className="mt-4 grid gap-3">
@@ -83,7 +83,7 @@ export default function RegionDetailPage() {
             ))
           ) : (
             <p className="rounded-xl border border-white/10 bg-slate-900/70 p-4 text-sm text-slate-300">
-              No active signals in the current replay window.
+              No active alerts in the current replay window.
             </p>
           )}
         </div>

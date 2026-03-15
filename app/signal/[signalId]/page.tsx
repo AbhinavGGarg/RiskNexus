@@ -21,7 +21,7 @@ export default function SignalDetailPage() {
   if (!signal) {
     return (
       <Panel>
-        <p className="text-slate-200">Signal not found in the active simulation timeline.</p>
+        <p className="text-slate-200">Alert not found in the active warning timeline.</p>
       </Panel>
     );
   }
@@ -39,7 +39,7 @@ export default function SignalDetailPage() {
       <Panel className="space-y-4">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-slate-400">Signal Detail</p>
+            <p className="text-xs uppercase tracking-[0.14em] text-slate-400">Alert Detail</p>
             <h1 className="mt-1 text-2xl font-semibold text-slate-100">{meta.title}</h1>
             <p className="mt-2 text-sm text-slate-300">{signal.description}</p>
           </div>
@@ -52,7 +52,7 @@ export default function SignalDetailPage() {
             <p className="mt-2 text-sm text-slate-100">{region?.region.name ?? signal.regionId}</p>
           </div>
           <div className="rounded-xl border border-white/10 bg-slate-900/70 p-3">
-            <p className="text-xs uppercase tracking-[0.1em] text-slate-400">Signal Severity</p>
+            <p className="text-xs uppercase tracking-[0.1em] text-slate-400">Alert Severity</p>
             <p className="mt-2 text-sm text-rose-200">{formatScore(signal.severity)}</p>
           </div>
           <div className="rounded-xl border border-white/10 bg-slate-900/70 p-3">
@@ -70,10 +70,10 @@ export default function SignalDetailPage() {
       </Panel>
 
       <Panel>
-        <h2 className="text-base font-semibold text-slate-100">Why It Matters</h2>
+        <h2 className="text-base font-semibold text-slate-100">What Civilians Should Know</h2>
         <p className="mt-2 text-sm text-slate-300">{signal.whyItMatters}</p>
 
-        <h3 className="mt-4 text-sm font-medium text-slate-200">Possible Causes</h3>
+        <h3 className="mt-4 text-sm font-medium text-slate-200">Likely Triggers</h3>
         <ul className="mt-2 space-y-2 text-sm text-slate-300">
           {signal.possibleCauses.map((cause) => (
             <li
@@ -97,7 +97,7 @@ export default function SignalDetailPage() {
           ))}
         </div>
 
-        <h3 className="mt-4 text-sm font-medium text-slate-200">Impact Pathways</h3>
+        <h3 className="mt-4 text-sm font-medium text-slate-200">Likely Impact Pathway</h3>
         <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
           {signal.impactPathway.map((step, index) => (
             <div
@@ -116,9 +116,9 @@ export default function SignalDetailPage() {
       <Panel>
         <div className="mb-3 flex items-center justify-between">
           <div>
-            <h2 className="text-base font-semibold text-slate-100">System Dependency Graph</h2>
+            <h2 className="text-base font-semibold text-slate-100">Civilian Service Dependency Graph</h2>
             <p className="text-sm text-slate-400">
-              Highlighted nodes are directly affected by this signal.
+              Highlighted services are directly affected by this alert.
             </p>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function SignalDetailPage() {
           href={`/cascade?signalId=${signal.id}`}
           className="rounded-md border border-cyan-200/50 bg-cyan-400/15 px-4 py-2 text-sm text-cyan-100 transition hover:bg-cyan-300/20"
         >
-          Simulate Cascade Impact
+          Simulate Alert Spread
         </Link>
       </div>
     </div>

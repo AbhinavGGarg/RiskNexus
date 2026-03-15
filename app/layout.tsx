@@ -16,9 +16,9 @@ const monoFont = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RiskNexus | Global Risk Intelligence",
+  title: "RiskNexus | Conflict Early Warning",
   description:
-    "Explore emerging global risk signals and cascade impacts across interconnected systems.",
+    "Real-time conflict heatmaps that warn civilians before danger reaches them.",
 };
 
 export default function RootLayout({

@@ -7,7 +7,7 @@ export default function CascadePage() {
     <Suspense
       fallback={
         <Panel>
-          <p className="text-slate-200">Loading cascade simulation...</p>
+          <p className="text-slate-200">Loading alert spread simulation...</p>
         </Panel>
       }
     >

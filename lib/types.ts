@@ -1,25 +1,26 @@
 export type SignalType =
-  | "infrastructure_stress"
-  | "environmental_anomaly"
-  | "supply_chain_congestion"
-  | "humanitarian_risk_indicator"
-  | "governance_instability";
+  | "armed_clash_report"
+  | "heavy_weapon_activity"
+  | "roadblock_checkpoint_change"
+  | "communications_disruption"
+  | "civilian_displacement_signal";
 
 export type SignalCategory =
-  | "infrastructure"
-  | "environmental"
-  | "supply"
+  | "kinetic"
+  | "mobility"
+  | "information"
   | "humanitarian"
-  | "institutional";
+  | "infrastructure";
 
 export type SystemId =
-  | "transport_hubs"
-  | "ports"
-  | "power_stations"
-  | "water_systems"
+  | "evacuation_routes"
   | "hospitals"
-  | "supply_routes"
-  | "communications";
+  | "shelters"
+  | "communications"
+  | "water_networks"
+  | "power_grid"
+  | "aid_corridors"
+  | "checkpoint_network";
 
 export type ConfidenceLabel = "Low" | "Medium" | "High";
 

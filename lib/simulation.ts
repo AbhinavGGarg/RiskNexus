@@ -27,19 +27,18 @@ export function createSeededRandom(seed: number) {
 
 function chooseType(region: RegionDefinition, random: () => number): SignalType {
   const adjustments: Partial<Record<SignalType, number>> = {
-    infrastructure_stress: region.baselineRisk >= 0.45 ? 1.18 : 1,
-    environmental_anomaly:
-      region.id === "oceania" || region.id === "southeast_asia" ? 1.22 : 1,
-    supply_chain_congestion:
-      region.id === "east_asia" ||
-      region.id === "south_asia" ||
-      region.id === "north_america"
-        ? 1.2
+    armed_clash_report:
+      region.id === "middle_east" || region.id === "west_africa" || region.id === "south_asia"
+        ? 1.26
         : 1,
-    humanitarian_risk_indicator:
-      region.id === "west_africa" || region.id === "north_africa" ? 1.28 : 1,
-    governance_instability:
-      region.id === "middle_east" || region.id === "west_africa" ? 1.25 : 1,
+    heavy_weapon_activity:
+      region.id === "middle_east" || region.id === "north_africa" ? 1.22 : 1,
+    roadblock_checkpoint_change:
+      region.id === "south_asia" || region.id === "west_africa" ? 1.18 : 1,
+    communications_disruption:
+      region.id === "west_africa" || region.id === "south_america" ? 1.14 : 1,
+    civilian_displacement_signal:
+      region.id === "middle_east" || region.id === "north_africa" ? 1.24 : 1,
   };
 
   const weighted = SIGNAL_TYPES.map((type) => ({
@@ -58,7 +57,7 @@ function chooseType(region: RegionDefinition, random: () => number): SignalType 
     }
   }
 
-  return "infrastructure_stress";
+  return "armed_clash_report";
 }
 
 function createSignal(
@@ -70,7 +69,9 @@ function createSignal(
   const meta = SIGNAL_META[type];
 
   const severity = clamp(
-    region.baselineRisk * 0.42 + random() * 0.58 + (type === "governance_instability" ? 0.06 : 0),
+    region.baselineRisk * 0.44 +
+      random() * 0.56 +
+      (type === "heavy_weapon_activity" ? 0.08 : 0),
   );
 
   const lngJitter = (random() - 0.5) * 10;
@@ -101,14 +102,14 @@ function createFrame(
   regions: RegionDefinition[],
   random: () => number,
 ): TimelineFrame {
-  const globalPulse = 0.06 + 0.06 * Math.sin(index / 5);
+  const globalPulse = 0.08 + 0.08 * Math.sin(index / 5);
   const signals: Signal[] = [];
 
   for (const region of regions) {
-    const regionProbability = clamp(region.baselineRisk * 0.42 + globalPulse, 0.08, 0.7);
+    const regionProbability = clamp(region.baselineRisk * 0.45 + globalPulse, 0.08, 0.76);
 
     if (random() < regionProbability) {
-      const burstCount = random() > 0.86 ? 2 : 1;
+      const burstCount = random() > 0.84 ? 2 : 1;
       for (let i = 0; i < burstCount; i += 1) {
         const type = chooseType(region, random);
         signals.push(createSignal(region, type, timestamp, random));
@@ -172,23 +173,23 @@ export function getMostRecentSignals(
 }
 
 function getMessage(type: SignalType) {
-  if (type === "environmental_anomaly") {
-    return "Environmental anomaly detected near coastal belt";
+  if (type === "armed_clash_report") {
+    return "Confirmed armed clash reported near civilian neighborhoods";
   }
 
-  if (type === "infrastructure_stress") {
-    return "Infrastructure stress signal detected near major transportation hub";
+  if (type === "heavy_weapon_activity") {
+    return "Heavy weapon activity detected with elevated strike risk";
   }
 
-  if (type === "supply_chain_congestion") {
-    return "Supply route congestion trend rising across strategic corridor";
+  if (type === "roadblock_checkpoint_change") {
+    return "Checkpoint shifts reducing safe civilian movement routes";
   }
 
-  if (type === "humanitarian_risk_indicator") {
-    return "Humanitarian pressure indicator rising in vulnerable communities";
+  if (type === "communications_disruption") {
+    return "Communications outage may delay warning broadcasts";
   }
 
-  return "Institutional coordination instability signal observed";
+  return "Displacement signal rising as civilians begin to move";
 }
 
 export function buildActivityFeed(

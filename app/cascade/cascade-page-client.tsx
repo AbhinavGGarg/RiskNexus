@@ -30,7 +30,7 @@ export default function CascadePage() {
   if (!selectedSignal) {
     return (
       <Panel>
-        <p className="text-slate-200">No signal is available for cascade simulation yet.</p>
+        <p className="text-slate-200">No alert is available for spread simulation yet.</p>
       </Panel>
     );
   }
@@ -48,12 +48,12 @@ export default function CascadePage() {
       <Panel className="space-y-3">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-xs uppercase tracking-[0.14em] text-slate-400">Cascade Explorer</p>
+            <p className="text-xs uppercase tracking-[0.14em] text-slate-400">Alert Spread Simulator</p>
             <h1 className="mt-1 text-2xl font-semibold text-slate-100">
               {SIGNAL_META[selectedSignal.type].title}
             </h1>
             <p className="mt-1 text-sm text-slate-300">
-              Origin region: {region?.region.name ?? selectedSignal.regionId} • Severity {formatScore(selectedSignal.severity)}
+              Origin zone: {region?.region.name ?? selectedSignal.regionId} • Severity {formatScore(selectedSignal.severity)}
             </p>
           </div>
           <SignalTypeBadge type={selectedSignal.type} />
@@ -61,9 +61,9 @@ export default function CascadePage() {
 
         <div className="grid gap-3 md:grid-cols-[1.1fr_1.6fr]">
           <div className="rounded-xl border border-white/10 bg-slate-900/70 p-4">
-            <h2 className="text-sm font-medium text-slate-100">System Ripple Visualization</h2>
+            <h2 className="text-sm font-medium text-slate-100">Threat Ripple Visualization</h2>
             <p className="mt-1 text-xs text-slate-400">
-              Ripple expands as disruption propagates through dependencies.
+              Ripple expands as danger propagates through connected civilian services.
             </p>
             <div className="mt-3">
               <RippleVisual
@@ -74,7 +74,7 @@ export default function CascadePage() {
           </div>
 
           <div className="rounded-xl border border-white/10 bg-slate-900/70 p-4">
-            <h2 className="text-sm font-medium text-slate-100">Cascade Timeline</h2>
+            <h2 className="text-sm font-medium text-slate-100">Alert Timeline</h2>
             <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
               {CASCADE_STEPS_MINUTES.map((minute, index) => {
                 const isActive = index === safeStep;
@@ -90,7 +90,7 @@ export default function CascadePage() {
                     }`}
                   >
                     <p className="text-xs uppercase tracking-[0.1em] text-slate-400">Minute {minute}</p>
-                    <p className="mt-1">{minute === 0 ? "Initial disruption" : "Propagation step"}</p>
+                    <p className="mt-1">{minute === 0 ? "Initial alert" : "Spread step"}</p>
                   </button>
                 );
               })}
@@ -109,9 +109,9 @@ export default function CascadePage() {
       </Panel>
 
       <Panel>
-        <h2 className="text-base font-semibold text-slate-100">System Dependency Impact</h2>
+        <h2 className="text-base font-semibold text-slate-100">Civilian Service Impact</h2>
         <p className="text-sm text-slate-400">
-          Nodes shift from low to high strain as risk propagates across dependencies.
+          Services shift from low to high strain as danger propagates.
         </p>
         <SystemGraph
           nodeImpacts={impactMap}
@@ -122,8 +122,8 @@ export default function CascadePage() {
       </Panel>
 
       <Panel>
-        <h2 className="text-base font-semibold text-slate-100">Regional Spillover</h2>
-        <p className="text-sm text-slate-400">Nearby regions receive modeled risk increases from the active cascade step.</p>
+        <h2 className="text-base font-semibold text-slate-100">Neighboring Zone Escalation</h2>
+        <p className="text-sm text-slate-400">Nearby zones receive modeled danger increases from the active step.</p>
 
         <div className="mt-3 grid gap-2 md:grid-cols-3">
           {state.affectedRegions.map((effect) => {
@@ -134,10 +134,10 @@ export default function CascadePage() {
                 className="rounded-lg border border-white/10 bg-slate-900/75 p-3"
               >
                 <p className="text-sm font-medium text-slate-100">{target?.region.name ?? effect.regionId}</p>
-                <p className="mt-1 text-xs text-slate-300">Added cascade risk {formatScore(effect.addedRisk)}</p>
+                <p className="mt-1 text-xs text-slate-300">Added danger {formatScore(effect.addedRisk)}</p>
                 {target ? (
                   <p className="mt-1 text-xs text-slate-400">
-                    Effective risk {formatScore(Math.min(1, target.riskScore + effect.addedRisk))}
+                    Effective danger {formatScore(Math.min(1, target.riskScore + effect.addedRisk))}
                   </p>
                 ) : null}
               </div>
@@ -150,7 +150,7 @@ export default function CascadePage() {
             href={`/signal/${selectedSignal.id}`}
             className="rounded-md border border-white/15 px-3 py-1.5 text-xs text-slate-200 hover:border-cyan-200/40"
           >
-            Back to Signal Detail
+            Back to Alert Detail
           </Link>
         </div>
       </Panel>

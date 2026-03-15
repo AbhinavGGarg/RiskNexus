@@ -48,14 +48,14 @@ function toConfidenceLabel(score: number): ConfidenceLabel {
 
 function getConfidenceExplanation(label: ConfidenceLabel, count: number): string {
   if (label === "High") {
-    return `High confidence based on ${count} corroborating and recent signals.`;
+    return `High confidence from ${count} corroborating and recent conflict reports.`;
   }
 
   if (label === "Medium") {
-    return "Medium confidence due to partial signal agreement across monitored systems.";
+    return "Medium confidence due to partial agreement across monitoring sources.";
   }
 
-  return "Low confidence because signals are sparse or inconsistent across neighboring regions.";
+  return "Low confidence because reports are sparse or inconsistent across nearby zones.";
 }
 
 export function computeRegionInsights(
@@ -94,10 +94,13 @@ export function computeRegionInsights(
         ? regionSignals.reduce((sum, signal) => sum + signal.severity, 0) / count
         : 0;
 
-    const anomalyFactor =
+    const escalationFactor =
       count > 0
-        ? regionSignals.filter((signal) => signal.type === "environmental_anomaly")
-            .length / count
+        ? regionSignals.filter(
+            (signal) =>
+              signal.type === "armed_clash_report" ||
+              signal.type === "heavy_weapon_activity",
+          ).length / count
         : 0;
 
     const recencyFactor =
@@ -110,11 +113,11 @@ export function computeRegionInsights(
         : 0;
 
     const baseRisk = clamp(
-      region.baselineRisk * 0.25 +
-        density * 0.3 +
-        severityAverage * 0.3 +
-        anomalyFactor * 0.08 +
-        recencyFactor * 0.07,
+      region.baselineRisk * 0.24 +
+        density * 0.31 +
+        severityAverage * 0.29 +
+        escalationFactor * 0.1 +
+        recencyFactor * 0.06,
     );
 
     baseRiskMap.set(region.id, baseRisk);
@@ -130,7 +133,7 @@ export function computeRegionInsights(
       ) / Math.max(region.neighbors.length, 1);
 
     const adjustedRisk = clamp(
-      (baseRiskMap.get(region.id) ?? 0) * 0.84 + neighborRisk * 0.16,
+      (baseRiskMap.get(region.id) ?? 0) * 0.82 + neighborRisk * 0.18,
     );
 
     finalRiskMap.set(region.id, adjustedRisk);

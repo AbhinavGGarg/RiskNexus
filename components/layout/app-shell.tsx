@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { label: "Overview", href: "/" },
-  { label: "Signals Map", href: "/map" },
-  { label: "Cascade Explorer", href: "/cascade" },
+  { label: "Conflict Map", href: "/map" },
+  { label: "Alert Spread", href: "/cascade" },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -23,7 +23,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <aside className="hidden w-64 shrink-0 border-r border-white/10 bg-slate-950/80 px-5 py-6 md:block">
           <div className="mb-8">
             <p className="text-xs uppercase tracking-[0.22em] text-cyan-300">RiskNexus</p>
-            <h1 className="mt-2 text-xl font-semibold text-slate-100">Global Risk Intelligence</h1>
+            <h1 className="mt-2 text-xl font-semibold text-slate-100">Civilian Conflict Early Warning</h1>
           </div>
           <nav className="space-y-2">
             {NAV_ITEMS.map((item) => {
@@ -48,8 +48,8 @@ export function AppShell({ children }: { children: ReactNode }) {
             })}
           </nav>
           <p className="mt-8 text-xs leading-5 text-slate-400">
-            SDG-aligned monitoring for infrastructure resilience, climate early warning,
-            and institutional preparedness.
+            Real-time heatmap monitoring that helps civilians and responders see danger
+            building before it reaches them.
           </p>
         </aside>
 
@@ -58,7 +58,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Layered Exploration</p>
-                <p className="text-sm text-slate-200">Follow signals from overview to regional cascade impact.</p>
+                <p className="text-sm text-slate-200">Track conflict alerts from global overview to local warning details.</p>
               </div>
               <ReplayControls />
             </div>

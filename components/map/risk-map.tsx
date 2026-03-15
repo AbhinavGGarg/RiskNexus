@@ -285,9 +285,9 @@ export function RiskMap({ regions, onRegionSelect, className }: RiskMapProps) {
             .setHTML(
               `<div style="font-family: system-ui; font-size: 12px; color: #dbeafe;">
                 <div style="font-weight: 600; margin-bottom: 4px;">${readString(props, "name")}</div>
-                <div>Risk: ${formatScore(readNumber(props, "risk"))}</div>
+                <div>Danger: ${formatScore(readNumber(props, "risk"))}</div>
                 <div>Confidence: ${readString(props, "confidenceLabel", "Unknown")} (${formatPercent(readNumber(props, "confidence"))})</div>
-                <div>Signals: ${Math.round(readNumber(props, "signalCount"))}</div>
+                <div>Alerts: ${Math.round(readNumber(props, "signalCount"))}</div>
               </div>`,
             )
             .addTo(map);

@@ -25,7 +25,7 @@ export function ReplayControls() {
               : "bg-slate-800 text-slate-200 hover:bg-slate-700"
           }`}
         >
-          {replayMode ? "Replay Mode On" : "Live Mode"}
+          {replayMode ? "Replay Alerts On" : "Live Alerts"}
         </button>
         <p className="text-xs text-slate-300">
           Frame {activeFrameIndex + 1}/{timeline.length}
@@ -48,7 +48,7 @@ export function ReplayControls() {
             value={Math.min(replayIndex, timeline.length - 1)}
             onChange={(event) => setReplayIndex(Number(event.target.value))}
             className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-slate-700 accent-cyan-400"
-            aria-label="Event replay timeline"
+            aria-label="Alert replay timeline"
           />
         </div>
       ) : null}

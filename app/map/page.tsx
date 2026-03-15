@@ -18,9 +18,9 @@ export default function SignalsMapPage() {
       <Panel className="space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
-            <h2 className="text-lg font-semibold text-slate-100">Signals Map</h2>
+            <h2 className="text-lg font-semibold text-slate-100">Conflict Heatmap</h2>
             <p className="text-sm text-slate-400">
-              Hover for risk and confidence details. Click any region to open focused analysis.
+              Hover for danger and confidence details. Click any zone for focused civilian warning context.
             </p>
           </div>
           <div className="flex items-center gap-3 text-xs text-slate-300">
@@ -28,10 +28,10 @@ export default function SignalsMapPage() {
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" /> Low
             </span>
             <span className="inline-flex items-center gap-1">
-              <span className="h-2.5 w-2.5 rounded-full bg-amber-300" /> Medium
+              <span className="h-2.5 w-2.5 rounded-full bg-amber-300" /> Elevated
             </span>
             <span className="inline-flex items-center gap-1">
-              <span className="h-2.5 w-2.5 rounded-full bg-rose-400" /> High
+              <span className="h-2.5 w-2.5 rounded-full bg-rose-400" /> Severe
             </span>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default function SignalsMapPage() {
       </Panel>
 
       <Panel>
-        <h3 className="text-base font-semibold text-slate-100">Current Priority Regions</h3>
+        <h3 className="text-base font-semibold text-slate-100">Highest Alert Zones</h3>
         <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
           {top.map((region) => (
             <button
@@ -53,7 +53,7 @@ export default function SignalsMapPage() {
               onClick={() => router.push(`/region/${region.region.id}`)}
             >
               <p className="text-sm font-medium text-slate-100">{region.region.name}</p>
-              <p className="mt-1 text-xs text-slate-300">Risk {formatScore(region.riskScore)}</p>
+              <p className="mt-1 text-xs text-slate-300">Danger {formatScore(region.riskScore)}</p>
               <div className="mt-2">
                 <ConfidencePill
                   label={region.confidenceLabel}

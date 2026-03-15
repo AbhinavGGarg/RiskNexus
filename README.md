@@ -1,89 +1,88 @@
-# RiskNexus - Global Risk Intelligence MVP
+# RiskNexus - Civilian Conflict Early Warning MVP
 
-RiskNexus is a hackathon-ready intelligence dashboard built with Next.js that helps users detect emerging global risks and explore cascading impacts across interconnected systems.
+RiskNexus is a hackathon MVP focused on one mission:
+**real-time conflict heatmaps that warn civilians before danger reaches them.**
 
-The app is aligned with:
-- SDG 9 - Industry, Innovation and Infrastructure
+It turns scattered warning signals into a clear, layered flow:
+1. Global overview of active alerts
+2. Conflict heatmap showing danger concentration
+3. Zone-level details for local warning context
+4. Alert detail explaining why it matters
+5. Alert spread simulation for neighboring-zone escalation
+
+## Why It Matters
+
+In fast-moving conflicts, warning signals appear before severe harm, but they are fragmented.
+RiskNexus helps responders and communities:
+- identify where danger is rising
+- estimate where warning lead-time is shrinking
+- understand confidence in each alert
+- anticipate cascading impact on civilian services
+
+## SDG Relevance
+
 - SDG 11 - Sustainable Cities and Communities
-- SDG 13 - Climate Action
 - SDG 16 - Peace, Justice and Strong Institutions
-
-## Core Experience
-
-Layered exploration flow:
-1. Overview dashboard with global metrics, heatmap signals, and activity feed
-2. Signals Map for region-level risk and confidence scanning
-3. Region Details with focused risk context and clickable signal cards
-4. Signal Detail with causes, SDG tags, impact pathways, and dependency graph
-5. Cascade Explorer with ripple animation, time-step propagation, and affected region impacts
+- SDG 3 - Good Health and Well-Being
 
 ## Tech Stack
 
 - Next.js (App Router)
 - React + TypeScript
 - TailwindCSS
-- Mapbox GL JS + MapLibre fallback
+- Mapbox GL JS + automatic MapLibre fallback (no token required)
 - Recharts
 - react-force-graph-2d
 
-## Simulation Design
+## Data Model (Simulated for MVP)
 
-The MVP uses simulated data and periodic updates:
-- Signal timeline frames generated every 15 simulated minutes
-- Live mode appends new frames automatically
-- Event Replay Mode lets users scrub historical frames with a timeline slider
-- Region risk and confidence are recalculated from signal density, severity, recency, agreement, and neighbor consistency
+Signals are mock events with:
+- `type`
+- `severity`
+- `timestamp`
+- `location`
 
-## Getting Started Locally
+Risk and confidence are recalculated continuously from:
+- signal density
+- severity
+- recency
+- corroboration agreement
+- neighboring zone consistency
 
-1. Install dependencies:
+## Local Run
 
 ```bash
 npm install
-```
-
-2. Optional environment variable:
-
-```bash
-cp .env.example .env.local
-```
-
-`NEXT_PUBLIC_MAPBOX_TOKEN` is optional.
-If provided, the app uses Mapbox.
-If omitted, the app automatically uses a token-free MapLibre basemap.
-
-3. Run development server:
-
-```bash
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000)
 
-## Build and Run Production Locally
+## Optional Mapbox Token
+
+Map works without a token using MapLibre fallback.
+If you want Mapbox tiles, add:
 
 ```bash
-npm run build
-npm run start
+cp .env.example .env.local
+```
+
+Then set:
+
+```bash
+NEXT_PUBLIC_MAPBOX_TOKEN=pk.your_mapbox_public_token
 ```
 
 ## Deploy on Vercel
 
-1. Push this folder to a Git repository.
-2. Import the project in [Vercel](https://vercel.com/new).
-3. Optional: set `NEXT_PUBLIC_MAPBOX_TOKEN` in Vercel project settings if you want Mapbox tiles.
-4. Deploy.
+1. Push repository to GitHub
+2. Import project in [Vercel](https://vercel.com/new)
+3. Deploy (no required env vars)
+4. Optional: add `NEXT_PUBLIC_MAPBOX_TOKEN` later
 
-Vercel will automatically run `npm install` and `npm run build`.
+## Key Directories
 
-## Project Structure
-
-- `app/` - App Router pages (`overview`, `map`, `region`, `signal`, `cascade`)
-- `components/` - reusable UI, map, graph, chart, and provider components
-- `lib/` - simulation logic, scoring model, cascade model, typed constants
-- `hooks/` - small client-side utility hooks
-
-## Notes
-
-- The map works without backend services using mock signal generation.
-- If no Mapbox token is present, the app automatically uses MapLibre fallback tiles.
+- `app/` - pages (overview, map, region, signal, cascade)
+- `components/` - UI, map, charts, graphs, providers
+- `lib/` - simulation, scoring, cascade, constants, types
+- `hooks/` - utility hooks
